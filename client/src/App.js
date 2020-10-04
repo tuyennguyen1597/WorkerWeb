@@ -6,9 +6,10 @@ import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profile-format/CreateProfile';
-import PrivateRoute from './components/routing/PrivateRoute'
+import EditProfile from './components/profile-format/EditProfile';
+import PrivateRoute from './components/routing/PrivateRoute';
 import Register from './components/auth/Register';
-import Alert from './components/layout/Alert'
+import Alert from './components/layout/Alert';
 import './App.css';
 //Redux
 //Provider: make the redux store available to any nested components
@@ -25,9 +26,8 @@ if (localStorage.token) {
 const App = () => {
   //add the emty [], to make the useEffect run once
   useEffect(() => {
-    store.dispatch(loadUser())
-
-  }, [])
+    store.dispatch(loadUser());
+  }, []);
   return (
     <Provider store={store}>
       <Router>
@@ -40,13 +40,22 @@ const App = () => {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+              <PrivateRoute
+                exact
+                path='/create-profile'
+                component={CreateProfile}
+              />
+              <PrivateRoute
+                exact
+                path='/edit-profile'
+                component={EditProfile}
+              />
             </Switch>
           </section>
         </Fragment>
       </Router>
     </Provider>
-  )
+  );
 };
 
 export default App;
