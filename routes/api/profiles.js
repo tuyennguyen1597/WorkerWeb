@@ -5,6 +5,7 @@ const config = require('config')
 const request = require('request');
 
 const Profile = require('../../models/Profile');
+const Post = require('../../models/Post');
 const User = require('../../models/User');
 
 const router = express.Router();
@@ -14,7 +15,7 @@ const router = express.Router();
 //@access   Private
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id });
+        const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']);
         if (!profile) {
             return res.status(400).send('There is no profile for this user!');
         }
@@ -119,8 +120,7 @@ router.get('/', async (req, res) => {
 //@access   Public
 router.get('/user/:user_id', async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id })
-            .populate('user', ['name', 'avatar']);
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', ['name', 'avatar']);
         if (!profile) {
             return res.status(400).json({ msg: "Profile not found" });
         }
@@ -139,7 +139,8 @@ router.get('/user/:user_id', async (req, res) => {
 //@access   Private
 router.delete('/', auth, async (req, res) => {
     try {
-        //@todo make a remove for posts
+        //Remove user's posts
+        await Post.deleteMany({ user: req.user.id})
 
         //Profile remove
         await Profile.findOneAndRemove({ user: req.user.id });
@@ -208,9 +209,9 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 
         //Find remove index
         const removedId = profile.experience.map(exp => exp.id).indexOf(req.params.exp_id);
-
+console.log(removedId)
         profile.experience.splice(removedId, 1);
-
+console.log(profile.experience)
         await profile.save();
         return res.json(profile);
 
