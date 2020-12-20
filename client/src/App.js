@@ -9,8 +9,8 @@ import CreateProfile from './components/profile-format/CreateProfile';
 import EditProfile from './components/profile-format/EditProfile';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Register from './components/auth/Register';
-import Profiles from './components/profiles/Profiles'
-import Profile from './components/profile/Profile'
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 import Alert from './components/layout/Alert';
 import './App.css';
 //Redux
@@ -22,6 +22,7 @@ import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
 import AddExperience from './components/profile-format/AddExperience';
 import AddEducation from './components/profile-format/AddEducation';
+import Posts from './components/posts/Posts';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -66,6 +67,8 @@ const App = () => {
                 path='/add-education'
                 component={AddEducation}
               />
+
+              <PrivateRoute exact path='/posts' component={Posts} />
             </Switch>
           </section>
         </Fragment>

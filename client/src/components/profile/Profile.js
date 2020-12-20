@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileGithub from './ProfileGithub';
 import ProfileExperience from './ProfileExperience';
 import { getProfileById } from '../../actions/profile';
 import ProfileEducation from './ProfileEducation';
@@ -61,6 +62,9 @@ const Profile = ({
               ) : (
                 <h4>No education credentials</h4>
               )}
+            </div>
+            <div>
+              {profile.githubusername && (<ProfileGithub username={profile.githubusername}/>)}
             </div>
           </div>
         </Fragment>

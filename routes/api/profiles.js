@@ -295,7 +295,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 //@access   Public
 router.get('/github/:username', (req, res) => {
     const option = {
-        uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('clientID')}&client_secret=${config.get('clientSecret')}`,
+        uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientID')}&client_secret=${config.get('githubClientSecret')}`,
         method: 'GET',
         headers: { 'user-agent': 'node.js' }
     };

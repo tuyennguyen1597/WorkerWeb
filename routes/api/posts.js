@@ -96,7 +96,7 @@ router.put('/like/:id', auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (post.likes.filter(like => like.user.toString() == req.user.id).length > 0) {
-            return res.json({ msg: "Already liked" });
+            return res.status(400).json({ msg: "Already liked" });
         }
         post.likes.unshift({ user: req.user.id });
         await post.save();
@@ -118,7 +118,7 @@ router.put('/dislike/:id', auth, async (req, res) => {
             await post.save();
             return res.json(post);
         }
-        return res.json({ msg: 'Post has not been liked yet' });
+        return res.status(400).json({ msg: 'Post has not been liked yet' });
     } catch (err) {
         console.error(err.message);
         return res.status(500).send('Server error');
