@@ -1,0 +1,6 @@
+{
+    "mongoURI": "mongodb+srv://jadin1599:jadin1599@devconnector.0oudn.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jsonSecret": "secretcannottellbutcanbelistened",
+    "githubClientID": "08ab9c57cd588701c5c2",
+    "githubClientSecret": "8c2bf03b570558b58d7e4a60aabc711065a822aa"
+}
