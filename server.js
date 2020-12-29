@@ -20,7 +20,7 @@ app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/profiles', require('./routes/api/profiles'));
 
 //Serve static asset in production
-if (process.env.NODE_ENV === production) {
+if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
 
     app.get('*', (req, res) => {
